@@ -2,7 +2,7 @@ class Oystercard
   attr_reader :balance
   DEFAULT_BALANCE = 0
   MAXIMUM_CAPACITY = 90
-  ERROR_MAXIMUM_BALANCE = "Error! Maximum balance exceeded"
+  ERROR_MAXIMUM_BALANCE = "Error! Maximum balance of £#{MAXIMUM_CAPACITY} exceeded"
 
   def initialize(balance: DEFAULT_BALANCE)
     @balance = balance
