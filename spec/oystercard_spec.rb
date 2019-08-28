@@ -28,4 +28,20 @@ describe Oystercard do
     end
 
   end
+
+  describe "#state of card" do
+
+    it { is_expected.to respond_to(:in_journey?) }
+
+    it "will be in journey when card touches in" do
+      subject.touch_in
+      expect(subject.in_journey?).to eq true
+    end
+
+    it "will not be in journey when the card touches out" do
+      subject.touch_out
+      expect(subject.in_journey?).to eq false
+    end 
+
+  end
 end
