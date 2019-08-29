@@ -57,7 +57,7 @@ describe Oystercard do
     let(:station){ double :station }
     let(:entry_station){ double :station }
     let(:exit_station){ double :station }
-    let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+    let(:journey){ {entry_station: station, exit_station: station} }
 
     it "will remember entry station after touch in" do
       subject.top_up(10)
@@ -67,9 +67,9 @@ describe Oystercard do
 
     it "stores exit station" do
       subject.top_up(5)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
-      expect(subject.exit_station).to eq exit_station
+      subject.touch_in(station)
+      subject.touch_out(station)
+      expect(subject.exit_station).to eq station
     end
 
     it 'has an empty list of journeys by default' do
@@ -78,8 +78,8 @@ describe Oystercard do
 
     it "records journey" do
       subject.top_up(5)
-      subject.touch_in(entry_station)
-      subject.touch_out(exit_station)
+      subject.touch_in(station)
+      subject.touch_out(station)
       expect(subject.journeys).to include journey
     end
 
