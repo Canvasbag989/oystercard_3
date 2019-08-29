@@ -3,6 +3,9 @@ require 'oystercard'
 describe Oystercard do
 
   let(:station){ double :station }
+  let(:entry_station){ double :station }
+  let(:exit_station){ double :station }
+  let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
 
   it 'creates a new card' do
     is_expected.to respond_to(:top_up).with(1).argument
@@ -36,7 +39,6 @@ describe Oystercard do
     it "will not be in journey when the card touches out" do
       subject.touch_out(station)
       expect(subject.in_journey?).to eq false
-      expect(subject.exit_station).to eq station
     end
 
     it "it will raise an error unless the balance is at least £1" do
@@ -52,13 +54,34 @@ describe Oystercard do
 
   describe '#station' do
 
+    let(:station){ double :station }
+    let(:entry_station){ double :station }
+    let(:exit_station){ double :station }
+    let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+
     it "will remember entry station after touch in" do
       subject.top_up(10)
       subject.touch_in(station)
       expect(subject.entry_station).to eq station
     end
 
+    it "stores exit station" do
+      subject.top_up(5)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.exit_station).to eq exit_station
+    end
 
+    it 'has an empty list of journeys by default' do
+      expect(subject.journeys).to be_empty
+    end
+
+    it "records journey" do
+      subject.top_up(5)
+      subject.touch_in(entry_station)
+      subject.touch_out(exit_station)
+      expect(subject.journeys).to include journey
+    end
 
   end
 end

@@ -1,6 +1,7 @@
 class Oystercard
 
-  attr_reader :balance, :entry_station, :exit_station
+  attr_reader :balance, :entry_station, :exit_station, :journeys
+  # attr_accessor :journeys
 
   DEFAULT_BALANCE = 0
   MAXIMUM_CAPACITY = 90
@@ -13,6 +14,7 @@ class Oystercard
     @balance = balance
     @entry_station = entry_station
     @exit_station = exit_station
+    @journeys = []
 
   end
 
@@ -34,6 +36,11 @@ class Oystercard
     deduct(MINIMUM_BALANCE)
     @entry_station = nil
     @exit_station = station
+    @journeys << { entry_station: station, exit_station: station }
+  end
+
+  def journeys
+    @journeys
   end
 
   private
