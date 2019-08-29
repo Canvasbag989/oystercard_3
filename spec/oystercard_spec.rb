@@ -34,8 +34,9 @@ describe Oystercard do
     end
 
     it "will not be in journey when the card touches out" do
-      subject.touch_out
+      subject.touch_out(station)
       expect(subject.in_journey?).to eq false
+      expect(subject.exit_station).to eq station
     end
 
     it "it will raise an error unless the balance is at least £1" do
@@ -45,7 +46,7 @@ describe Oystercard do
     it "will reduce the correct fare amount when the journey is complete" do
       subject.top_up(5)
       minimum_balance = Oystercard::MINIMUM_BALANCE
-      expect{ subject.touch_out }.to change{ subject.balance }.by -minimum_balance
+      expect{ subject.touch_out(station) }.to change{ subject.balance }.by -minimum_balance
     end
   end
 

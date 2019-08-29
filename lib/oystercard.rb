@@ -1,6 +1,6 @@
 class Oystercard
 
-  attr_reader :balance, :entry_station
+  attr_reader :balance, :entry_station, :exit_station
 
   DEFAULT_BALANCE = 0
   MAXIMUM_CAPACITY = 90
@@ -8,9 +8,12 @@ class Oystercard
   ERROR_MINIMUM_BALANCE = "Insufficient balance to touch in"
   ERROR_MAXIMUM_BALANCE = "Error! Maximum balance of £#{MAXIMUM_CAPACITY} exceeded"
 
+
   def initialize(balance: DEFAULT_BALANCE)
     @balance = balance
-    @entry_station = entry_station #nil?
+    @entry_station = entry_station
+    @exit_station = exit_station
+
   end
 
   def top_up(amount)
@@ -27,9 +30,10 @@ class Oystercard
     @entry_station = station
   end
 
-  def touch_out
+  def touch_out(station)
     deduct(MINIMUM_BALANCE)
     @entry_station = nil
+    @exit_station = station
   end
 
   private
