@@ -5,7 +5,7 @@ describe Oystercard do
   let(:station){ double :station }
   let(:entry_station){ double :station }
   let(:exit_station){ double :station }
-  let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
+  let(:journey){ {entry_station: station, exit_station: station} }
 
   it 'creates a new card' do
     is_expected.to respond_to(:top_up).with(1).argument
@@ -53,11 +53,6 @@ describe Oystercard do
   end
 
   describe '#station' do
-
-    let(:station){ double :station }
-    let(:entry_station){ double :station }
-    let(:exit_station){ double :station }
-    let(:journey){ {entry_station: station, exit_station: station} }
 
     it "will remember entry station after touch in" do
       subject.top_up(10)
