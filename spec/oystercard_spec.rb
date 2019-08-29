@@ -30,12 +30,12 @@ describe Oystercard do
     it "will be in journey when card touches in" do
       subject.top_up(10)
       subject.touch_in(station)
-      expect(subject.in_journey?).to eq station
+      expect(subject.in_journey?).to eq true
     end
 
     it "will not be in journey when the card touches out" do
       subject.touch_out
-      expect(subject.in_journey?).to eq nil
+      expect(subject.in_journey?).to eq false
     end
 
     it "it will raise an error unless the balance is at least £1" do
