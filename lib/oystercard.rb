@@ -11,8 +11,8 @@ class Oystercard
 
   def initialize(balance: DEFAULT_BALANCE)
     @balance = balance
-    @entry_station = entry_station
-    @exit_station = exit_station
+    # @entry_station = entry_station
+    # @exit_station = exit_station
     @journeys = []
 
   end
